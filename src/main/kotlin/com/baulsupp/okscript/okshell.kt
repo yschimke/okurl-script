@@ -4,7 +4,6 @@ import com.baulsupp.oksocial.output.ConsoleHandler
 import com.baulsupp.oksocial.output.OutputHandler
 import com.baulsupp.oksocial.output.SimpleResponseExtractor
 import com.baulsupp.oksocial.output.UsageException
-import com.baulsupp.okurl.Main
 import com.baulsupp.okurl.authenticator.AuthenticatingInterceptor
 import com.baulsupp.okurl.authenticator.RenewingInterceptor
 import com.baulsupp.okurl.credentials.DefaultToken
@@ -163,7 +162,7 @@ suspend inline fun <reified T> OkHttpClient.query(request: Request): T {
   val stringResult = this.queryForString(request)
 
   @Suppress("BlockingMethodInNonBlockingContext")
-  return Main.moshi.adapter(T::class.java).fromJson(stringResult)!!
+  return moshi.adapter(T::class.java).fromJson(stringResult)!!
 }
 
 suspend inline fun <reified T> OkHttpClient.queryPages(
@@ -201,7 +200,7 @@ suspend inline fun <reified V> OkHttpClient.queryMap(request: Request): Map<Stri
   val stringResult = this.queryForString(request)
 
   @Suppress("BlockingMethodInNonBlockingContext")
-  return Main.moshi.mapAdapter<V>()
+  return moshi.mapAdapter<V>()
     .fromJson(stringResult)!!
 }
 
@@ -215,7 +214,7 @@ suspend inline fun <reified V> OkHttpClient.queryList(request: Request): List<V>
   val stringResult = this.queryForString(request)
 
   @Suppress("BlockingMethodInNonBlockingContext")
-  return Main.moshi.listAdapter<V>()
+  return moshi.listAdapter<V>()
     .fromJson(stringResult)!!
 }
 
@@ -237,7 +236,7 @@ suspend inline fun <reified V> OkHttpClient.queryOptionalMap(request: Request): 
   val stringResult = this.queryForString(request)
 
   @Suppress("BlockingMethodInNonBlockingContext")
-  return Main.moshi.mapAdapter<V>()
+  return moshi.mapAdapter<V>()
     .fromJson(stringResult)
 }
 
@@ -355,7 +354,7 @@ fun requestBuilder(
 fun Request.Builder.tokenSet(tokenSet: Token): Request.Builder = tag(Token::class.java, tokenSet)
 
 fun Request.Builder.postJsonBody(body: Any) {
-  val content = Main.moshi.adapter(body.javaClass)
+  val content = moshi.adapter(body.javaClass)
     .toJson(body)!!
   post(content.toRequestBody(JSON))
 }
