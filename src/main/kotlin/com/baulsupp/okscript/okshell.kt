@@ -1,4 +1,4 @@
-package com.baulsupp.okurl.kotlin
+package com.baulsupp.okscript
 
 import com.baulsupp.oksocial.output.ConsoleHandler
 import com.baulsupp.oksocial.output.OutputHandler
@@ -27,6 +27,18 @@ import java.util.Date
 import java.util.Locale
 
 import com.baulsupp.oksocial.output.UsageException
+import com.baulsupp.okurl.authenticator.AuthenticatingInterceptor
+import com.baulsupp.okurl.authenticator.RenewingInterceptor
+import com.baulsupp.okurl.credentials.SimpleCredentialsStore
+import com.baulsupp.okurl.kotlin.JSON
+import com.baulsupp.okurl.kotlin.execute
+import com.baulsupp.okurl.kotlin.queryForString
+import com.baulsupp.okurl.kotlin.request
+import com.baulsupp.okurl.kotlin.requestBuilder
+import com.baulsupp.okurl.kotlin.warmup
+import okhttp3.Cache
+import okhttp3.brotli.BrotliInterceptor
+import java.io.File
 
 fun usage(msg: String): Nothing = throw UsageException(msg)
 
@@ -35,10 +47,16 @@ inline fun <T, R> Iterable<T>.flatMapMeToo(function: (T) -> Iterable<R>): List<R
 }
 
 val client: OkHttpClient by lazy {
-  // TODO build default
-  OkHttpClient()
+  val credentialsStore = SimpleCredentialsStore
+  val cacheDirectory = File(System.getenv("HOME"), ".okurl/shell.cache")
+  OkHttpClient.Builder()
+    .cache(Cache(cacheDirectory, (64 * 1024 * 1024).toLong()))
+    .addInterceptor(BrotliInterceptor)
+    .addInterceptor(AuthenticatingInterceptor(credentialsStore))
+    .addInterceptor(RenewingInterceptor(credentialsStore))
+    .build()
 }
-val outputHandler: OutputHandler<Response> by lazy { ConsoleHandler<Response>(OkHttpResponseExtractor()) }
+val outputHandler: OutputHandler<Response> by lazy { ConsoleHandler(OkHttpResponseExtractor()) }
 val locationSource: LocationSource by lazy { BestLocation(outputHandler) }
 
 inline suspend fun <reified T> query(

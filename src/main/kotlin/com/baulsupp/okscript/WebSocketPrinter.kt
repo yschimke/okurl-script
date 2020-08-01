@@ -1,4 +1,4 @@
-package com.baulsupp.okurl.kotlin
+package com.baulsupp.okscript
 
 import com.baulsupp.oksocial.output.OutputHandler
 import kotlinx.coroutines.runBlocking
