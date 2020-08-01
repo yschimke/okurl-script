@@ -1,6 +1,5 @@
 package com.baulsupp.okscript
 
-import org.slf4j.jul.JDK14LoggerFactory
 import java.util.logging.Formatter
 import java.util.logging.Level
 import java.util.logging.LogManager
