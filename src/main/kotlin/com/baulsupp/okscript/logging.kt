@@ -1,5 +1,6 @@
 package com.baulsupp.okscript
 
+import org.slf4j.jul.JDK14LoggerFactory
 import java.util.logging.Formatter
 import java.util.logging.Level
 import java.util.logging.LogManager
@@ -15,8 +16,7 @@ fun getLogger(name: String): Logger {
 }
 
 fun initLogging() {
-  LogManager.getLogManager()
-    .reset()
+  LogManager.getLogManager().reset()
 
   val activeLogger = getLogger("")
   val handler = java.util.logging.ConsoleHandler()
@@ -27,7 +27,4 @@ fun initLogging() {
   activeLogger.addHandler(handler)
 
   getLogger("").level = Level.SEVERE
-  getLogger("io.netty").level = Level.SEVERE
-  getLogger("io.reactivex").level = Level.SEVERE
-  getLogger("io.rsocket").level = Level.SEVERE
 }

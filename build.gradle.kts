@@ -46,8 +46,12 @@ tasks {
 }
 
 dependencies {
-  api("com.github.yschimke:oksocial-output:5.1")
-  api("com.github.yschimke:okurl:2.14")
+  api("com.github.yschimke:oksocial-output:5.1") {
+    exclude(group = "org.slf4j")
+  }
+  api("com.github.yschimke:okurl:2.14") {
+    exclude(group = "org.slf4j")
+  }
   api("com.squareup.okhttp3:logging-interceptor:4.8.0")
   api("com.squareup.okhttp3:okhttp:4.8.0")
   api("com.squareup.okhttp3:okhttp-brotli:4.8.0")
@@ -63,6 +67,7 @@ dependencies {
   api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
   api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.8")
   api("org.zeroturnaround:zt-exec:1.11")
+  api("org.slf4j:slf4j-nop:2.0.0-alpha1")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
