@@ -56,17 +56,66 @@ tasks {
 }
 
 dependencies {
-  api("com.github.yschimke:oksocial-output:5.1")
-  api("com.github.yschimke:okurl:2.12")
-  api("com.squareup.okhttp3:logging-interceptor:4.8.0")
-  api("com.squareup.okhttp3:okhttp:4.8.0")
-  api("com.squareup.okhttp3:okhttp-brotli:4.8.0")
-  api("com.squareup.okhttp3:okhttp-dnsoverhttps:4.8.0")
-  api("com.squareup.okhttp3:okhttp-sse:4.8.0")
-  api("com.squareup.okhttp3:okhttp-tls:4.8.0")
-  api("com.squareup.moshi:moshi:1.9.3")
-  api("com.squareup.moshi:moshi-adapters:1.9.3")
-  api("com.squareup.moshi:moshi-kotlin:1.9.3")
+  api("com.github.yschimke:oksocial-output:5.1") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.github.yschimke:okurl:2.12") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.okhttp3:logging-interceptor:4.8.0") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.okhttp3:okhttp:4.8.0") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.okhttp3:okhttp-brotli:4.8.0") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.okhttp3:okhttp-dnsoverhttps:4.8.0") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.okhttp3:okhttp-sse:4.8.0") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.okhttp3:okhttp-tls:4.8.0") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.okio:okio:2.4.3") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.moshi:moshi:1.9.3") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.moshi:moshi-adapters:1.9.3") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
+  api("com.squareup.moshi:moshi-kotlin:1.9.3") {
+    exclude(group = "org.jetbrains.kotlin")
+    exclude(group = "com.squareup.okhttp3")
+    exclude(group = "com.squareup.okio")
+  }
   implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.0-rc")
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.0-rc")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8-1.4.0-rc")
@@ -78,9 +127,6 @@ dependencies {
   implementation("com.formdev:svgSalamander:1.1.2.1")
   implementation("org.jfree:jfreesvg:3.4")
   implementation("info.picocli:picocli:4.4.0")
-
-//  implementation("org.jetbrains.kotlin:kotlin-scripting-dependencies:1.4.0-rc")
-  implementation("org.jetbrains.kotlin:kotlin-main-kts:1.4.0-rc")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
