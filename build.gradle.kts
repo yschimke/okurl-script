@@ -58,17 +58,11 @@ dependencies {
   api("com.squareup.moshi:moshi:1.9.3")
   api("com.squareup.moshi:moshi-adapters:1.9.3")
   api("com.squareup.moshi:moshi-kotlin:1.9.3")
-  implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.72")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug:1.3.8")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.8")
-  implementation("org.slf4j:slf4j-api:2.0.0-alpha0")
-  implementation("org.slf4j:slf4j-jdk14:2.0.0-alpha0")
-  implementation("org.zeroturnaround:zt-exec:1.11")
-  implementation("com.formdev:svgSalamander:1.1.2.1")
-  implementation("org.jfree:jfreesvg:3.4")
-  implementation("info.picocli:picocli:4.4.0")
+  api("org.jetbrains.kotlin:kotlin-reflect:1.3.72")
+  api("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.8")
+  api("org.zeroturnaround:zt-exec:1.11")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
