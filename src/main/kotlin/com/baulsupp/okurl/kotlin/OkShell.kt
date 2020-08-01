@@ -26,11 +26,22 @@ import java.time.Instant
 import java.util.Date
 import java.util.Locale
 
-val client: OkHttpClient by lazy { OkHttpClient() }
+import com.baulsupp.oksocial.output.UsageException
+
+fun usage(msg: String): Nothing = throw UsageException(msg)
+
+inline fun <T, R> Iterable<T>.flatMapMeToo(function: (T) -> Iterable<R>): List<R> {
+  return this.map { function(it) }.flatten()
+}
+
+val client: OkHttpClient by lazy {
+  // TODO build default
+  OkHttpClient()
+}
 val outputHandler: OutputHandler<Response> by lazy { ConsoleHandler<Response>(OkHttpResponseExtractor()) }
 val locationSource: LocationSource by lazy { BestLocation(outputHandler) }
 
-inline fun <reified T> query(
+inline suspend fun <reified T> query(
   url: String,
   tokenSet: Token = DefaultToken,
   noinline init: Request.Builder.() -> Unit = {}
@@ -38,9 +49,10 @@ inline fun <reified T> query(
   return query(request(url, tokenSet, init))
 }
 
-inline fun <reified T> query(request: Request): T {
-  val stringResult = runBlocking { client.queryForString(request) }
+inline suspend fun <reified T> query(request: Request): T {
+  val stringResult = client.queryForString(request)
 
+  @Suppress("BlockingMethodInNonBlockingContext")
   return moshi.adapter(T::class.java).fromJson(stringResult)!!
 }
 
@@ -57,12 +69,10 @@ fun warmup(vararg urls: String) {
 
 fun location(): Location? = runBlocking { locationSource.read() }
 
-fun show(url: String) {
-  runBlocking {
-    val response = client.execute(request(url))
+suspend fun show(url: String) {
+  val response = client.execute(request(url))
 
-    outputHandler.showOutput(response)
-  }
+  outputHandler.showOutput(response)
 }
 
 suspend fun showOutput(response: Response) {
@@ -77,13 +87,13 @@ var dateOnlyformat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
 fun epochSecondsToDate(seconds: Long) = dateOnlyformat.format(Date(seconds * 1000))!!
 
-val terminalWidth: Int? by lazy { runBlocking { (outputHandler as? ConsoleHandler<Response>)?.terminalWidth() } }
+suspend fun terminalWidth(): Int? {
+  return (outputHandler as? ConsoleHandler<Response>)?.terminalWidth()
+}
 
 fun jsonPostRequest(url: String, body: String): Request =
   requestBuilder(url, DefaultToken).post(
     body.toRequestBody(JSON)
   ).build()
-
-var args: List<String> = listOf()
 
 val simpleOutput = ConsoleHandler(SimpleResponseExtractor)

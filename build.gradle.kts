@@ -2,9 +2,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version Versions.kotlin
+  kotlin("jvm") version "1.3.72"
   `maven-publish`
-  distribution
   id("com.github.ben-manes.versions") version "0.28.0"
   id("net.nemerosa.versioning") version "2.12.1"
   id("com.diffplug.gradle.spotless") version "3.28.1"
@@ -13,16 +12,7 @@ plugins {
 repositories {
   jcenter()
   mavenCentral()
-//  maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
   maven(url = "https://jitpack.io")
-//  maven(url = "https://repo.maven.apache.org/maven2")
-//  maven(url = "https://dl.bintray.com/kotlin/kotlin-eap/")
-//  maven(url = "https://dl.bintray.com/kotlin/kotlin-dev/")
-//  maven(url = "https://repo.spring.io/milestone/")
-//  maven(url = "https://dl.bintray.com/reactivesocket/RSocket/")
-//  maven(url = "https://oss.sonatype.org/content/repositories/releases/")
-//  maven(url = "https://dl.bintray.com/yschimke/baulsupp.com/")
-//  maven(url = "https://packages.atlassian.com/maven-public")
 }
 
 group = "com.github.yschimke"
@@ -41,8 +31,8 @@ java {
 tasks {
   withType(KotlinCompile::class) {
     kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.apiVersion = "1.4"
-    kotlinOptions.languageVersion = "1.4"
+    kotlinOptions.apiVersion = "1.3"
+    kotlinOptions.languageVersion = "1.3"
 
     kotlinOptions.allWarningsAsErrors = false
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=enable")
@@ -56,71 +46,23 @@ tasks {
 }
 
 dependencies {
-  api("com.github.yschimke:oksocial-output:5.1") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.github.yschimke:okurl:2.12") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.okhttp3:logging-interceptor:4.8.0") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.okhttp3:okhttp:4.8.0") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.okhttp3:okhttp-brotli:4.8.0") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.okhttp3:okhttp-dnsoverhttps:4.8.0") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.okhttp3:okhttp-sse:4.8.0") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.okhttp3:okhttp-tls:4.8.0") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.okio:okio:2.4.3") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.moshi:moshi:1.9.3") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.moshi:moshi-adapters:1.9.3") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  api("com.squareup.moshi:moshi-kotlin:1.9.3") {
-    exclude(group = "org.jetbrains.kotlin")
-    exclude(group = "com.squareup.okhttp3")
-    exclude(group = "com.squareup.okio")
-  }
-  implementation("org.jetbrains.kotlin:kotlin-reflect:1.4.0-rc")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.0-rc")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8-1.4.0-rc")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug:1.3.8-1.4.0-rc")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.8-1.4.0-rc")
+  api("com.github.yschimke:oksocial-output:5.1")
+  api("com.github.yschimke:okurl:2.14")
+  api("com.squareup.okhttp3:logging-interceptor:4.8.0")
+  api("com.squareup.okhttp3:okhttp:4.8.0")
+  api("com.squareup.okhttp3:okhttp-brotli:4.8.0")
+  api("com.squareup.okhttp3:okhttp-dnsoverhttps:4.8.0")
+  api("com.squareup.okhttp3:okhttp-sse:4.8.0")
+  api("com.squareup.okhttp3:okhttp-tls:4.8.0")
+  api("com.squareup.okio:okio:2.4.3")
+  api("com.squareup.moshi:moshi:1.9.3")
+  api("com.squareup.moshi:moshi-adapters:1.9.3")
+  api("com.squareup.moshi:moshi-kotlin:1.9.3")
+  implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.72")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-debug:1.3.8")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.8")
   implementation("org.slf4j:slf4j-api:2.0.0-alpha0")
   implementation("org.slf4j:slf4j-jdk14:2.0.0-alpha0")
   implementation("org.zeroturnaround:zt-exec:1.11")
@@ -158,34 +100,6 @@ publishing {
     create("mavenJava", MavenPublication::class) {
       from(components["java"])
       artifact(sourcesJar)
-    }
-  }
-}
-
-distributions {
-  getByName("main") {
-    contents {
-      from("${rootProject.projectDir}") {
-        include("README.md", "LICENSE")
-      }
-      from("${rootProject.projectDir}/src/main/scripts") {
-        fileMode = Integer.parseUnsignedInt("755", 8)
-        into("bin")
-      }
-      from("${rootProject.projectDir}/src/test/kotlin/commands") {
-        fileMode = Integer.parseUnsignedInt("755", 8)
-        exclude("local")
-        into("bin")
-      }
-//      from("${rootProject.projectDir}/src/main/resources") {
-//        into("scripts")
-//      }
-//      into("lib") {
-//        from(jar)
-//      }
-//      into("lib") {
-//        from(configurations.runtimeClasspath)
-//      }
     }
   }
 }
