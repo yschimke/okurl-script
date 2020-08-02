@@ -63,6 +63,7 @@ dependencies {
   api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.8")
   api("org.zeroturnaround:zt-exec:1.11")
   api("org.slf4j:slf4j-nop:2.0.0-alpha1")
+  api("com.sun.activation:javax.activation:1.2.0")
 }
 
 val sourcesJar by tasks.creating(Jar::class) {
