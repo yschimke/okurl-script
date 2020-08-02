@@ -3,6 +3,8 @@ package com.baulsupp.okscript
 import com.baulsupp.oksocial.output.ConsoleHandler
 import com.baulsupp.oksocial.output.OutputHandler
 import com.baulsupp.oksocial.output.SimpleResponseExtractor
+import com.baulsupp.okurl.Main
+import com.baulsupp.okurl.Main.Companion
 import com.baulsupp.okurl.authenticator.AuthenticatingInterceptor
 import com.baulsupp.okurl.authenticator.RenewingInterceptor
 import com.baulsupp.okurl.credentials.SimpleCredentialsStore
@@ -23,7 +25,10 @@ val client: OkHttpClient by lazy {
     .addInterceptor(BrotliInterceptor)
     .addInterceptor(AuthenticatingInterceptor(credentialsStore))
     .addInterceptor(RenewingInterceptor(credentialsStore))
-    .build()
+    .build().also {
+      Main.client = it
+      Main.moshi = moshi
+    }
 }
 
 val outputHandler: OutputHandler<Response> by lazy {
