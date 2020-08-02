@@ -111,6 +111,7 @@ publishing {
     create("mavenJava", MavenPublication::class) {
       from(components["java"])
       artifact(sourcesJar)
+      artifact(tasks["distTar"])
     }
   }
 }
