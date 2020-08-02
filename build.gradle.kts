@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
   kotlin("jvm") version "1.3.72"
   `maven-publish`
+  distribution
   id("com.github.ben-manes.versions") version "0.28.0"
   id("net.nemerosa.versioning") version "2.12.1"
   id("com.diffplug.gradle.spotless") version "3.28.1"
@@ -36,12 +37,6 @@ tasks {
 
     kotlinOptions.allWarningsAsErrors = false
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=enable")
-  }
-}
-
-tasks {
-  withType(Tar::class) {
-    compression = Compression.NONE
   }
 }
 
@@ -87,6 +82,22 @@ spotless {
     ktlint("0.31.0").userData(mutableMapOf("indent_size" to "2", "continuation_indent_size" to "2"))
     trimTrailingWhitespace()
     endWithNewline()
+  }
+}
+
+distributions {
+  main {
+    contents {
+      from("${rootProject.projectDir}") {
+        include("README.md", "LICENSE")
+      }
+      from("${rootProject.projectDir}/src/main/zsh") {
+        into("zsh")
+      }
+      from("${rootProject.projectDir}/src/main/scripts") {
+        into("bin")
+      }
+    }
   }
 }
 
