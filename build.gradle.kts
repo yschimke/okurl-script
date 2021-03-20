@@ -41,10 +41,10 @@ tasks {
 }
 
 dependencies {
-  api("com.github.yschimke:oksocial-output:6.0") {
+  api("com.github.yschimke:oksocial-output:6.1") {
     exclude(group = "org.slf4j")
   }
-  api("com.github.yschimke:okurl:3.0") {
+  api("com.github.yschimke:okurl:3.1") {
     exclude(group = "org.slf4j")
     exclude(group = "com.squareup.okhttp3")
   }
