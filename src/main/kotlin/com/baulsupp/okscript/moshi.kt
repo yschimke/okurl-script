@@ -7,11 +7,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.util.Date
 
 val moshi = Moshi.Builder()
   .add(MapboxLatLongAdapter())
   .add(KotlinJsonAdapterFactory())
-  .add(Rfc3339DateJsonAdapter())
+  .add(Date::class.java, Rfc3339DateJsonAdapter())
   .add(Rfc3339InstantJsonAdapter())
   .build()!!
 
