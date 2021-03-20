@@ -1,10 +1,9 @@
 package com.baulsupp.okscript
 
-import com.baulsupp.oksocial.output.ConsoleHandler
-import com.baulsupp.oksocial.output.OutputHandler
-import com.baulsupp.oksocial.output.SimpleResponseExtractor
+import com.baulsupp.oksocial.output.handler.ConsoleHandler
+import com.baulsupp.oksocial.output.handler.OutputHandler
+import com.baulsupp.oksocial.output.responses.SimpleResponseExtractor
 import com.baulsupp.okurl.Main
-import com.baulsupp.okurl.Main.Companion
 import com.baulsupp.okurl.authenticator.AuthenticatingInterceptor
 import com.baulsupp.okurl.authenticator.RenewingInterceptor
 import com.baulsupp.okurl.credentials.SimpleCredentialsStore

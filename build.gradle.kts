@@ -2,7 +2,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.3.72"
+  kotlin("jvm") version "1.4.31"
   `maven-publish`
   distribution
   id("com.github.ben-manes.versions") version "0.28.0"
@@ -32,8 +32,8 @@ java {
 tasks {
   withType(KotlinCompile::class) {
     kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.apiVersion = "1.3"
-    kotlinOptions.languageVersion = "1.3"
+    kotlinOptions.apiVersion = "1.4"
+    kotlinOptions.languageVersion = "1.4"
 
     kotlinOptions.allWarningsAsErrors = false
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=enable")
@@ -41,27 +41,28 @@ tasks {
 }
 
 dependencies {
-  api("com.github.yschimke:oksocial-output:5.1") {
+  api("com.github.yschimke:oksocial-output:6.0") {
     exclude(group = "org.slf4j")
   }
-  api("com.github.yschimke:okurl:2.14") {
+  api("com.github.yschimke:okurl:3.0") {
     exclude(group = "org.slf4j")
+    exclude(group = "com.squareup.okhttp3")
   }
   api("com.squareup.okhttp3:logging-interceptor:4.8.0")
-  api("com.squareup.okhttp3:okhttp:4.8.0")
-  api("com.squareup.okhttp3:okhttp-brotli:4.8.0")
-  api("com.squareup.okhttp3:okhttp-dnsoverhttps:4.8.0")
-  api("com.squareup.okhttp3:okhttp-sse:4.8.0")
-  api("com.squareup.okhttp3:okhttp-tls:4.8.0")
-  api("com.squareup.okio:okio:2.4.3")
-  api("com.squareup.moshi:moshi:1.9.3")
-  api("com.squareup.moshi:moshi-adapters:1.9.3")
-  api("com.squareup.moshi:moshi-kotlin:1.9.3")
-  api("org.jetbrains.kotlin:kotlin-reflect:1.3.72")
-  api("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72")
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.8")
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.8")
-  api("org.zeroturnaround:zt-exec:1.11")
+  implementation(platform("com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.2"))
+  api("com.squareup.okhttp3:okhttp")
+  api("com.squareup.okhttp3:okhttp-brotli")
+  api("com.squareup.okhttp3:okhttp-dnsoverhttps")
+  api("com.squareup.okhttp3:okhttp-sse")
+  api("com.squareup.okhttp3:okhttp-tls")
+  api("com.squareup.okio:okio:3.0.0-alpha.1")
+  api("com.squareup.moshi:moshi:1.11.0")
+  api("com.squareup.moshi:moshi-adapters:1.11.0")
+  api("com.squareup.moshi:moshi-kotlin:1.11.0")
+  api("org.jetbrains.kotlin:kotlin-reflect:1.4.31")
+  api("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31")
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.3")
   api("org.slf4j:slf4j-nop:2.0.0-alpha1")
   api("com.sun.activation:javax.activation:1.2.0")
 }
