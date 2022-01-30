@@ -1,8 +1,5 @@
 package com.baulsupp.okscript
 
-import com.baulsupp.oksocial.output.handler.ConsoleHandler
-import com.baulsupp.oksocial.output.handler.OutputHandler
-import com.baulsupp.oksocial.output.responses.SimpleResponseExtractor
 import com.baulsupp.okurl.Main
 import com.baulsupp.okurl.authenticator.AuthenticatingInterceptor
 import com.baulsupp.okurl.authenticator.RenewingInterceptor
@@ -10,6 +7,10 @@ import com.baulsupp.okurl.credentials.SimpleCredentialsStore
 import com.baulsupp.okurl.location.BestLocation
 import com.baulsupp.okurl.location.LocationSource
 import com.baulsupp.okurl.okhttp.OkHttpResponseExtractor
+import com.baulsupp.schoutput.handler.ConsoleHandler
+import com.baulsupp.schoutput.handler.OutputHandler
+import com.baulsupp.schoutput.outputHandlerInstance
+import com.baulsupp.schoutput.responses.SimpleResponseExtractor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -33,7 +34,7 @@ val client: OkHttpClient by lazy {
 val outputHandler: OutputHandler<Response> by lazy {
   initLogging()
 
-  ConsoleHandler.instance(OkHttpResponseExtractor())
+  outputHandlerInstance(OkHttpResponseExtractor())
 }
 
 val simpleOutput = ConsoleHandler(SimpleResponseExtractor)

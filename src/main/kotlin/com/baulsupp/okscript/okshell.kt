@@ -1,6 +1,6 @@
 package com.baulsupp.okscript
 
-import com.baulsupp.oksocial.output.UsageException
+import com.baulsupp.schoutput.UsageException
 import com.baulsupp.okurl.credentials.DefaultToken
 import com.baulsupp.okurl.location.Location
 import com.baulsupp.okurl.util.ClientException

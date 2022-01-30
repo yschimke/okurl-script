@@ -2,7 +2,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.4.31"
+  kotlin("jvm") version "1.6.10"
   `maven-publish`
   distribution
   id("com.github.ben-manes.versions") version "0.28.0"
@@ -25,15 +25,15 @@ base {
 }
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_1_8
-  targetCompatibility = JavaVersion.VERSION_1_8
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks {
   withType(KotlinCompile::class) {
     kotlinOptions.jvmTarget = "1.8"
-    kotlinOptions.apiVersion = "1.4"
-    kotlinOptions.languageVersion = "1.4"
+    kotlinOptions.apiVersion = "1.6"
+    kotlinOptions.languageVersion = "1.6"
 
     kotlinOptions.allWarningsAsErrors = false
     kotlinOptions.freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=enable")
@@ -41,28 +41,25 @@ tasks {
 }
 
 dependencies {
-  api("com.github.yschimke:oksocial-output:6.1") {
-    exclude(group = "org.slf4j")
-  }
-  api("com.github.yschimke:okurl:3.1") {
+  api("com.github.yschimke:okurl:4.3") {
     exclude(group = "org.slf4j")
     exclude(group = "com.squareup.okhttp3")
   }
-  api("com.squareup.okhttp3:logging-interceptor:4.8.0")
+  api("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2")
   implementation(platform("com.squareup.okhttp3:okhttp-bom:5.0.0-alpha.2"))
   api("com.squareup.okhttp3:okhttp")
   api("com.squareup.okhttp3:okhttp-brotli")
   api("com.squareup.okhttp3:okhttp-dnsoverhttps")
   api("com.squareup.okhttp3:okhttp-sse")
   api("com.squareup.okhttp3:okhttp-tls")
-  api("com.squareup.okio:okio:3.0.0-alpha.1")
-  api("com.squareup.moshi:moshi:1.11.0")
-  api("com.squareup.moshi:moshi-adapters:1.11.0")
-  api("com.squareup.moshi:moshi-kotlin:1.11.0")
+  api("com.squareup.okio:okio:3.0.0")
+  api("com.squareup.moshi:moshi:1.13.0")
+  api("com.squareup.moshi:moshi-adapters:1.13.0")
+  api("com.squareup.moshi:moshi-kotlin:1.13.0")
   api("org.jetbrains.kotlin:kotlin-reflect:1.4.31")
   api("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.31")
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3")
-  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.3")
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+  api("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.0")
   api("org.slf4j:slf4j-nop:2.0.0-alpha1")
   api("com.sun.activation:javax.activation:1.2.0")
 }
